@@ -45,11 +45,6 @@
                     $api_film = file_get_contents("https://api.themoviedb.org/3/movie/".$id."?api_key=70cdeab72720dc1a144f4d142a9189c6&language=en-US");
                     $json = json_decode($api_film,true);
                     $img = "https://image.tmdb.org/t/p/w500".$json['poster_path'];
-
-                    // Similar Film List
-                    $api_film2 = file_get_contents("https://api.themoviedb.org/3/movie/".$id."/similar?api_key=70cdeab72720dc1a144f4d142a9189c6&language=en-US&page=1");
-                    $json2 = json_decode($api_film2,true);
-
                     if($json['poster_path'] == null){
                         $img = "../img_notfound.jpg.png";
                     }
@@ -137,33 +132,6 @@
                 }
                 else{
 
-                }
-
-                if(isset($json2)){
-                    echo "
-                    <br>
-                    <br>
-                    <div class='row'>
-                        <h3> Similar Film </h3>
-                        <hr>
-                    </div>
-                    <br>
-                    <div class='row'>
-                    ";
-                    for($i=0;$i<4;$i++){
-                        $img2 = $json2['results'][$i]['poster_path'];
-                        $judul2 = $json2['results'][$i]['title'];
-                        $id2 = $json2['results'][$i]['id'];
-
-                        echo 
-                        "
-                                <a href='?id=".$id2."' class='col-md-3 card'>
-                                    <img src='https://image.tmdb.org/t/p/w500".$img2."' height=400>
-                                    <h6 style='text-align:center; padding: 20px;'>".$judul2." </h6>
-                                </a>
-                        ";
-                    }
-                    echo "</div>";
                 }
             
             ?>
